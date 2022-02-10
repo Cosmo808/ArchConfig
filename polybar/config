@@ -58,9 +58,8 @@ module-margin-right = 2
 
 ;font-0 = NotoSans-Bold:size=13;2
 font-0 = MesloLGS NF:style=Bold:size=13
-font-1 = MaterialIcons:size=12
-font-2 = 
-;font-2 = Font Awesome 5 Free Solid:style=Solid
+font-1 = Font Awesome 5 Free,Font Awesome 5 Free Solid:style=Solid
+font-2 = Font Awesome 5 Free,Font Awesome 5 Free Regular:style=Regular
 
 modules-left = i3 xkeyboard date
 modules-center = xwindow
@@ -515,6 +514,9 @@ label-close =  cancel
 label-close-foreground = ${colors.secondary}
 label-separator = -
 label-separator-foreground = ${colors.foreground-alt}
+format-background = #3f3f3f
+format-underline = #fba922
+format-padding = 1
 
 menu-0-0 = reboot
 menu-0-0-exec = menu-open-1

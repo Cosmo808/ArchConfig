@@ -35,9 +35,14 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 exec --no-startup-id nm-applet
 
 
-new_window none
-new_float normal
+# new_window none
+# new_float normal
+
+default_border pixel 0
+default_floating_border normal
 hide_edge_borders both
+for_window [class=".*"] title_format "<b>%title</b>"
+for_window [all] title_window_icon padding 3px
 
 gaps inner 4
 gaps outer 2
@@ -45,18 +50,26 @@ gaps outer 2
 exec_always picom -bc --experimental-backends --conf ~/.config/compton.conf
 exec --no-startup-id feh --randomize --bg-fill ~/PicDesktop
 exec --no-startup-id ~/.config/polybar/launch.sh
-exec_always sudo iw dev wlan0 connect ZJUWLAN
-exec_always sudo iwctl --passphrase CNX808217 station wlan0 connect 1701
-exec --no-startup-id sleep 1; fcitx &
+exec_always sudo iwctl station wlan0 connect Cosmo
+exec_always sudo wpa_supplicant -B -i wlan0 -c /etc/netctl/nus
+exec_always sudo iw dev wlan0 connect ZJUWLAN-NEW
+exec_always sudo iwctl station wlan0 connect 1701
+exec --no-startup-id sleep 2; fcitx &
+exec --no-startup-id sudo logid
 
 
-bindsym $mod+p exec mate-screenshot -i
+bindsym $mod+p exec import -pause 1 ~/Desktop/screenshot/"Screenshot at $(date '+%Y-%m-%d %H-%M-%S').png"
+bindsym $mod+Shift+p exec import -window root ~/Desktop/screenshot/"Screenshot at $(date '+%Y-%m-%d %H-%M-%S').png"
 bindsym $mod+m exec caja
 bindsym $mod+Shift+minus move scratchpad
 bindsym $mod+minus scratchpad show
 bindsym $mod+F1 exec ~/.config/brightness/down.sh
 bindsym $mod+F2 exec ~/.config/brightness/up.sh
 bindsym $mod+f exec fsearch
+bindsym $mod+k exec pkill picom
+bindsym $mod+l exec picom -bc --experimental-backends --conf ~/.config/compton.conf
+
+workspace 6 output HDMI-A-0
 
 
 # Use pactl to adjust volume in PulseAudio.
